@@ -151,4 +151,59 @@ JSONRequest is used to send a request with a raw (JSON) body. It takes 4 paramet
 
 The reponse is handled on the onResponse callback method while the error is handled on the onError callback method.
 
-      
+
+## (4) Circular ImageView
+
+Description : 
+
+A fast circular ImageView perfect for profile images. 
+
+## Usage
+
+Add the following dependency to your build.gradle file.
+
+```groovy
+   compile 'de.hdodenhof:circleimageview:2.1.0'  
+```
+
+Inside your layout add this XML tag
+
+```XML
+<de.hdodenhof.circleimageview.CircleImageView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_image"
+    android:layout_width="96dp"
+    android:layout_height="96dp"
+    android:src="@drawable/profile"
+    app:civ_border_width="2dp"
+    app:civ_border_color="#FF000000"/>
+```
+
+## (5) Picasso
+
+Images add much-needed context and visual flair to Android applications. Picasso allows for hassle-free image loading in your application—often in one line of code!
+
+
+Many common pitfalls of image loading on Android are handled automatically by Picasso:
+
+* Handling ImageView recycling and download cancelation in an adapter.
+* Complex image transformations with minimal memory use.
+* Automatic memory and disk caching.
+
+
+## Usage
+
+Add the following dependency to your build.gradle file.
+
+```groovy
+    compile 'com.squareup.picasso:picasso:2.5.2'
+```
+
+Add one of the following lines into your Activity
+
+```java
+Picasso.with(context).load(R.drawable.landing_screen).into(imageView1); // Loading from drawable folder
+Picasso.with(context).load("file:///android_asset/DvpvklR.png").into(imageView2); // Loading from a file
+Picasso.with(context).load(url).into(imageView3); // Loading from an online URL.
+```
+
