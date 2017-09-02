@@ -452,6 +452,54 @@ The model contains converting a user to JSON and vice versa to be able to parse 
 This package is one of the most important packages in the project. The package contains all the logic behind the API calls, Parsing responses and sending requests to the server. Every service will be discussed into details.
 
 
+### 1- UserService
+
+This class is responsible for any user related API call (login, register, change password, etc.)
+
+```java
+ public static void currentUser(final Context context, final VolleyObjectCallback callback) {
+        final Resources resources = context.getResources();
+        String preferences = resources.getString(R.string.PREFS_NAME);
+        SharedPreferences settings = context.getSharedPreferences(preferences, 0);
+        String userId = settings.getString("userId", "");
+        final String token = settings.getString("token", "");
+        String tabbsBaseUrl = resources.getString(R.string.url_tabbsNew);
+        String url = String.format("%s/api/users/%s", tabbsBaseUrl, userId);
+
+        JsonObjectRequest currentUserRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("response 2: ", response.toString());
+                callback.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("response 1: ", error.toString() + token);
+                callback.onFailure(error);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> MyData = new HashMap<>();
+                MyData.put("Authorization", "Bearer "+token); //miscHelper.readToken(context));
+                return MyData;
+            }
+        };
+        VolleySingleton.getInstance(context).addToRequestQueue(currentUserRequest);
+    }
+```
+The above code is responsible for getting the user information using userID by requesting the API a GET request written by the following code
+
+```java
+ JsonObjectRequest currentUserRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+		}
+		
+```
+
+NOTE: SharedPrefrence is a key-value local storage for small data (token, id, etc.)
 
 
 
