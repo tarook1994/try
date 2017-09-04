@@ -501,6 +501,66 @@ The above code is responsible for getting the user information using userID by r
 
 NOTE: SharedPrefrence is a key-value local storage for small data (token, id, etc.)
 
+UserService consists of several methods : 
+* currentUser  : Which makes a GET API call to */api/users/{{id}}* to retrive the user information.
+* updateUserPersonalDetails : Which makes a POST API call to */api/users/{{id}}* to update user information.
+* registerWithEmail : Which makes a POST request to register the user with a regular email.
+* registerWithGmail :  Which makes a POST request to register the user using his google account.
+* registerWithFacebook :  Which makes a POST request to register the user using his facebook account.
+* loginWithEmail : Which makes a POST request to login the user using his regular email account.
+* changePassword : Which makes a POST request to change a user password.
+* saveLoginDetails : Saves the user's *_id, token and expiration date_* locally so the app does not make an API call everytime the user opens the app.
+* isUserValid : Checks wherther there is any saved information locally about the current user.
+
+All API calls are made simillar to the code snippet above with the change of the API call (POST,GET, etc.) and parameters.
+
+
+### 2- TabbService
+
+This class is responsible for making the API calls related to the Tabbs.
+
+* createTabb : Implemented but not used.
+* getTabbWithId : This methods makes an API call to Get a new Tabb for a 3rd Party Code.
+* findTabbWithId : Get an existing Tabb for a 3rd Party Code.
+
+
+### 3- MerchantService
+
+This call contains the method "updateMerchantDetails" which makes a request to update the merchant details. This method is implemented but not used.
+
+### 4- TransactionService 
+
+This class impelements all the API call related to the user's transaction.
+
+* transactionsForMerchant : This is a merchant related call. It is impelemented but not used.
+* transactionWithId : This method is for getting a transaction using the transaction ID.
+* createPayment : This methods makes an API call for applying the user's payment.
+* transactionsForUser : This method gets the list of transactions associated with the user's ID.
+
+### -5 VendorService
+
+This class implements the method updateBankDetails but it is not used.
+
+
+### -6 MenuService & MenuItemFamilyService & CategoryService
+
+These classes implements some methods but not used.
+
+
+### -7 LoginService
+
+This class is redundant and implements previously implemented API calls (in UserSerivce) and could be deleted.
+
+### -8 CreditCardService
+
+This class implements credit card related calls. 
+
+* creditCardsForUser : Gets the list of credit cards for a specific user. Called when the user checks his cards on his profile.
+* registerCreditCard : Registers a credit card for the user. Called whenever the user register a new credit card.
+* removeUserCreditCards : Removes the user's Credit card.
+
+
+
 
 
 
